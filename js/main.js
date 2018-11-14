@@ -1,3 +1,15 @@
+/***** 이미지 로더 *****/
+$('body').imagesLoaded()
+  .done( function( instance ) {
+	$(".loader").hide(0);
+    console.log('all images successfully loaded');
+  })
+  .progress( function( instance, image ) {
+    var result = image.isLoaded ? 'loaded' : 'broken';
+    console.log( 'image is ' + result + ' for ' + image.img.src );
+  });
+
+  /***** firebse 초기변수 *****/
 var config = {
 	apiKey: "AIzaSyCvuEVM1opXs4Eiq9iVmlXJ0EZyYDpk2Kg",
 	authDomain: "skfro266-mall.firebaseapp.com",
@@ -194,6 +206,47 @@ $.ajax({
 	}
 });
 
+
+/***** 왼쪽 카테고리 패널 0번(furniture) *****/
+var furniture = [];
+furniture[0] = [];
+furniture[1] = [];
+furniture[2] = [];
+furniture[3] = [];
+furniture[0][0] = "../img/main/menu-product-1-118x118.jpg";
+furniture[1][0] = "../img/main/menu-product-3-118x118.jpg";
+furniture[2][0] = "../img/main/menu-product-3-2-118x118.jpg";
+furniture[3][0] = "../img/main/menu-product-5-2-118x118.jpg";
+furniture[0][1] = "CLOCKS";
+furniture[1][1] = "TABLETOP";
+furniture[2][1] = "KITCHEN";
+furniture[3][1] = "LIGHTING";
+furniture[0][2] = "Mantel Clocks";
+furniture[1][2] = "Pepper Shakers";
+furniture[2][2] = "Oil Vineager Sets";
+furniture[3][2] = "Interior Lighting";
+furniture[0][3] = "Anniversary Clocks";
+furniture[1][3] = "Spice Jars";
+furniture[2][3] = "Bottle Racks";
+furniture[3][3] = "Celling Lamps";
+furniture[0][4] = "Wall Clocks";
+furniture[1][4] = "Dish Drainers";
+furniture[2][4] = "Chopping Boards";
+furniture[3][4] = "Wall LAmps";
+furniture[0][5] = "Digital Clocks";
+furniture[1][5] = "Cocktail Shakers";
+furniture[2][5] = "Vacuum Flasks";
+furniture[3][5] = "Floor Lamps";
+furniture[0][6] = "Travel and Alarm";
+furniture[1][6] = "Utensil HOlders";
+furniture[2][6] = "Utensil HOlders";
+furniture[3][6] = "Celling Lamps";
+var furnitureBrand = [];
+furnitureBrand[0] = "../img/main/brand-alessi.png";
+furnitureBrand[1] = "../img/main/brand-Eva-Solo.png";
+furnitureBrand[2] = "../img/main/brand-PackIt.png";
+furnitureBrand[3] = "../img/main/brand-witra.png";
+
 /***** 왼쪽카테고리 *****/
 var sFn = function (data) {
 	if (data.result) {
@@ -202,46 +255,80 @@ var sFn = function (data) {
 			html = '<li>';
 			html += '<span class="' + rs.icon + '"></span>';
 			html += '<a href ="' + rs.link + '"<span>' + rs.title + '</span></a>';
-			if (rs.ajax != '') html += '<span class="fas fa-angle-right"></span>';
+			if (rs.ajax != '') {
+				html += '<span class="fas fa-angle-right"></span>';
+				html += '<div class="cate_panel clear">';
+				/***** 패널생성,시작 *****/
+				if(i==0){
+					for(var j=0; j<furniture.length; j++){
+						html += '<ul id="fur_panel'+i+'" class="fur_panel">';
+						html += '<li><img src="'+furniture[j][0]+'" class="img"></li>';
+						html += '<li>'+furniture[j][1]+'</li>';
+						html += '<li>'+furniture[j][2]+'</li>';
+						html += '<li>'+furniture[j][3]+'</li>';
+						html += '<li>'+furniture[j][4]+'</li>';
+						html += '<li>'+furniture[j][5]+'</li>';
+						html += '<li>'+furniture[j][6]+'</li>';
+						html += '</ul>';
+				}
+				html += '<ul class="fur_brand_panel clear">';
+				for(var j=0; j<furnitureBrand.length; j++){
+					html += '<li><img src="'+furnitureBrand[j]+'" class="img w3-grayscale-max w3-opacity"></li>';
+				}
+				html += '</ul>';
+				}
+				/***** 패널생성,종료 *****/
+				html += '</div>';
+			}
 			html += '</li>';
 			$(".banners .cate").append(html);
 		}
+		$(".cate > li").hover(function(){
+			$(this).find(".cate_panel").show();
+		}, function(){
+			$(this).find(".cate_panel").hide();
+		});
+		$(".fur_brand_panel img").hover(function(){
+			$(this).removeClass("w3-grayscale-max w3-opacity");
+		}, function(){
+			$(this).addClass("w3-grayscale-max w3-opacity");
+		});
 	}
 }
 
 var cateAjax = new Ajax("../json/cate_left.json");
+//cateAjax.addData({chk:0});
 cateAjax.send(sFn);
-	
-/* 
+/*
 $(".banner > li").each(function(i){
 	$(this).children("div").each(function(i){
 		$(this).css("animation-delay", i/5+"s").addClass("ban_ani");
 	});
 });
- */
-
+*/
 var banNow = 0;
-$(".banners .rt_arrow").click(function () {
-	$(".banner").children("li").hide();//find:자손 children:자식
+$(".banners .rt_arrow").click(function(){
+	$(".banner").children("li").hide();
 	$(".banner").children("li").eq(banNow).show();
 	$(".banner").children("li").eq(banNow).children(".ban_img").addClass("img_ani");
-	$(".banner").children("li").eq(banNow).children("div").each(function (i) {
-		$(this).css("animation-delay", i/5 + "s").addClass("ban_ani");
+	$(".banner").children("li").eq(banNow).children("div").each(function(i){
+		$(this).css("animation-delay", i/5+"s").addClass("ban_ani");
 	});
-	if (banNow == 2) banNow = -1;
+	if(banNow == 2) banNow = -1;
 	banNow++;
 }).trigger("click");
 
 $(".banners").mousemove(function(evt){
-    var delta = 50;
-    var cX = evt.clientX;
-    var cY = evt.clientY;
-    var iX = $(this).find(".ban_img").width()/2;
-    var iY = $(this).find(".ban_img").height()/2;
-    var mX = (iX - cX)/delta;
-    var mY = (iY - cY)/delta;
-    $(this).find(".ban_img").css("transform","translateX("+mX+"px, "+mY+"px)");
+	var delta = 50;
+	var cX = evt.clientX;
+	var cY = evt.clientY;
+	var iX = $(this).find(".ban_img").width()/2;
+	var iY = $(this).find(".ban_img").height()/2;
+	var mX = (iX - cX)/delta;
+	var mY = (iY - cY)/delta;
+	$(this).find(".ban_img").css("transform", "translate("+mX+"px, "+mY+"px)");
 });
+
 
 // cateAjax.addData({chk:0});
 /*
