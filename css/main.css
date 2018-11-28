@@ -2,6 +2,10 @@
 .wrap {max-width:1200px; margin:0 auto;}
 .arrow_down {font-size:0.5em !important;}
 .txt_green {color:#84cf13;}
+.c_greyccc{color: #CCC;}
+.c_greyddd{color: #ddd;}
+.c_greyeee{color: #eee;}
+.c_green{color: #84b736;}
 
 /***** 이미지 로더 *****/
 .loader {width:100%; height:100%; background-color:rgba(0,0,0,0.4); display:table; position:absolute; z-index:99999;}
@@ -58,7 +62,7 @@ position: absolute; top:0; right:-0.5em;}
 .navs > .etc > :nth-child(2) {padding:0 0.5em;}
 
 .menu > ul > li {cursor:pointer;}
-.menu_modal {background-color:#fff; top:51px; left:0; position:absolute !important; width:100%; display: none; padding:3em 0; border-bottom:1px solid #ccc; z-index: 10;}
+.menu_modal {background-color:#fff; top:51px; left:0; position:absolute !important; width:100%; display: none; padding:3em 0; border-bottom:1px solid #ccc; z-index:10;}
 .menu_modal a {text-decoration:none;}
 .menu_modal li {line-height:2.5em; position:relative;}
 .menu_modal .tooltip {position:absolute; padding:0.15em; top:-1.20em; left:0; opacity:1; color:white; font-size:0.6em;}
@@ -89,6 +93,7 @@ position: absolute; top:0; right:-0.5em;}
 .post .post_cnt {color:#999; font-size:0.75em;}
 .post .post_comment {color:#999; font-size:0.75em;}
 
+/***** 좌측 네비게이션 및 배너 *****/
 .banners {position:relative;}
 .banners .cate {width:270px; border-right:1px solid #ccc; position: relative;}
 .banners .banner {width:100%; position:absolute; top:0; left:270px; background-color:#f8f8f8; height:490px; overflow: hidden; padding: 5% 0 0 5%;}
@@ -101,8 +106,8 @@ position: absolute; top:0; right:-0.5em;}
 .fur_panel > li {padding:5px 0;}
 .fur_panel > li:hover {color:#84b736;}
 .fur_panel > li:nth-child(2) {font-weight:bold;}
-.fur_brand_panel{width: 100%; position: absolute; bottom: 0; background-color: #f1f1f1;}
-.fur_brand_panel > li {float: left; width: 25%; text-align: center; padding: 0.5% 5%;}
+.fur_brand_panel {width:100%; position:absolute; bottom:0; background-color:#f1f1f1;}
+.fur_brand_panel > li {float:left; width:25%; text-align:center; padding:0.5% 5%;}
 
 .banner > li {display:none;}
 .banner .ban_img {position:absolute; width:50%; right:5%; top:0;}
@@ -128,3 +133,9 @@ position: absolute; top:0; right:-0.5em;}
 	0% {opacity: 0; right:-500px;}
 	100% {opacity: 1; right:0;}
 }
+
+/***** FEATURED *****/
+.featured{margin-top: 60px; text-align: center;}
+.featured > h3:nth-child(1){}
+.featured > h3:nth-child(3){}
+.featured > h5{}
