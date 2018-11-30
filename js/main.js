@@ -1,14 +1,14 @@
 /***** 이미지 로더 *****/
 $('body').imagesLoaded()
-  .done( function( instance ) {
-	$(".loader").hide(0);
-    console.log('all images successfully loaded');
-  })
-  .progress( function( instance, image ) {
-    var result = image.isLoaded ? 'loaded' : 'broken';
-  });
+	.done(function (instance) {
+		$(".loader").hide(0);
+		console.log('all images successfully loaded');
+	})
+	.progress(function (instance, image) {
+		var result = image.isLoaded ? 'loaded' : 'broken';
+	});
 
-  /***** firebse 초기변수 *****/
+/***** firebse 초기변수 *****/
 var config = {
 	apiKey: "AIzaSyCvuEVM1opXs4Eiq9iVmlXJ0EZyYDpk2Kg",
 	authDomain: "skfro266-mall.firebaseapp.com",
@@ -258,23 +258,23 @@ var sFn = function (data) {
 				html += '<span class="fas fa-angle-right"></span>';
 				html += '<div class="cate_panel clear">';
 				/***** 패널생성,시작 *****/
-				if(i==0){
-					for(var j=0; j<furniture.length; j++){
-						html += '<ul id="fur_panel'+i+'" class="fur_panel">';
-						html += '<li><img src="'+furniture[j][0]+'" class="img"></li>';
-						html += '<li>'+furniture[j][1]+'</li>';
-						html += '<li>'+furniture[j][2]+'</li>';
-						html += '<li>'+furniture[j][3]+'</li>';
-						html += '<li>'+furniture[j][4]+'</li>';
-						html += '<li>'+furniture[j][5]+'</li>';
-						html += '<li>'+furniture[j][6]+'</li>';
+				if (i == 0) {
+					for (var j = 0; j < furniture.length; j++) {
+						html += '<ul id="fur_panel' + i + '" class="fur_panel">';
+						html += '<li><img src="' + furniture[j][0] + '" class="img"></li>';
+						html += '<li>' + furniture[j][1] + '</li>';
+						html += '<li>' + furniture[j][2] + '</li>';
+						html += '<li>' + furniture[j][3] + '</li>';
+						html += '<li>' + furniture[j][4] + '</li>';
+						html += '<li>' + furniture[j][5] + '</li>';
+						html += '<li>' + furniture[j][6] + '</li>';
 						html += '</ul>';
-				}
-				html += '<ul class="fur_brand_panel clear">';
-				for(var j=0; j<furnitureBrand.length; j++){
-					html += '<li><img src="'+furnitureBrand[j]+'" class="img w3-grayscale-max w3-opacity"></li>';
-				}
-				html += '</ul>';
+					}
+					html += '<ul class="fur_brand_panel clear">';
+					for (var j = 0; j < furnitureBrand.length; j++) {
+						html += '<li><img src="' + furnitureBrand[j] + '" class="img w3-grayscale-max w3-opacity"></li>';
+					}
+					html += '</ul>';
 				}
 				/***** 패널생성,종료 *****/
 				html += '</div>';
@@ -282,14 +282,14 @@ var sFn = function (data) {
 			html += '</li>';
 			$(".banners .cate").append(html);
 		}
-		$(".cate > li").hover(function(){
+		$(".cate > li").hover(function () {
 			$(this).find(".cate_panel").show();
-		}, function(){
+		}, function () {
 			$(this).find(".cate_panel").hide();
 		});
-		$(".fur_brand_panel img").hover(function(){
+		$(".fur_brand_panel img").hover(function () {
 			$(this).removeClass("w3-grayscale-max w3-opacity");
-		}, function(){
+		}, function () {
 			$(this).addClass("w3-grayscale-max w3-opacity");
 		});
 	}
@@ -306,26 +306,26 @@ $(".banner > li").each(function(i){
 });
 */
 var banNow = 0;
-$(".banners .rt_arrow").click(function(){
+$(".banners .rt_arrow").click(function () {
 	$(".banner").children("li").hide();
 	$(".banner").children("li").eq(banNow).show();
 	$(".banner").children("li").eq(banNow).children(".ban_img").addClass("img_ani");
-	$(".banner").children("li").eq(banNow).children("div").each(function(i){
-		$(this).css("animation-delay", i/5+"s").addClass("ban_ani");
+	$(".banner").children("li").eq(banNow).children("div").each(function (i) {
+		$(this).css("animation-delay", i / 5 + "s").addClass("ban_ani");
 	});
-	if(banNow == 2) banNow = -1;
+	if (banNow == 2) banNow = -1;
 	banNow++;
 }).trigger("click");
 
-$(".banners").mousemove(function(evt){
+$(".banners").mousemove(function (evt) {
 	var delta = 50;
 	var cX = evt.clientX;
 	var cY = evt.clientY;
-	var iX = $(this).find(".ban_img").width()/2;
-	var iY = $(this).find(".ban_img").height()/2;
-	var mX = (iX - cX)/delta;
-	var mY = (iY - cY)/delta;
-	$(this).find(".ban_img").css("transform", "translate("+mX+"px, "+mY+"px)");
+	var iX = $(this).find(".ban_img").width() / 2;
+	var iY = $(this).find(".ban_img").height() / 2;
+	var mX = (iX - cX) / delta;
+	var mY = (iY - cY) / delta;
+	$(this).find(".ban_img").css("transform", "translate(" + mX + "px, " + mY + "px)");
 });
 
 
@@ -414,97 +414,164 @@ for (var j = 0; j < cates[i].sub.length; j++) {
 modalMake1();
 */
 /***** Featured *****/
+$(".featured_item").hover(function () {
+	$(this).find("div").stop().animate({
+		"bottom": 0
+	}, 200);
+	$(this).find("img").css({
+		"animation-name": "featuredAni"
+	});
+}, function () {
+	$(this).find("div").stop().animate({
+		"bottom": "-3rem"
+	}, 200);
+	$(this).find("img").css({
+		"animation-name": "featuredAniBack"
+	});
+});
+
+/***** Featured Categories *****/
 $(".featured_item").hover(function(){
 	$(this).find("div").stop().animate({"bottom":0}, 200);
 	$(this).find("img").css({"animation-name":"featuredAni"});
-},function(){
+}, function(){
 	$(this).find("div").stop().animate({"bottom":"-3rem"}, 200);
 	$(this).find("img").css({"animation-name":"featuredAniBack"});
 });
 
-/***** Featured products *****/
+/***** Featured Products *****/
 var prdNum = 0;
-$(".prd_nav > li").click(function(){
-	prdNum = $(this).index()
-	$(".prd_nav > li").css({"color":"#666"});
-	$(".prd_nav div").css({"width":0});
-	$(this).css({"color":"#222"});
-	$(this).children("div").css({"width":"100%"});
-});
-$(".prd_nav > li").hover(function(){
-	if($(this).index() != prdNum){
-		$(this).css({"color":"#222"});
-		$(this).children("div").stop().animate({"width":"100%"},200);
-	}
-}, function(){
-	if($(this).index() != prdNum){
-		$(this).css({"color":"#666"});
-		$(this).children("div").stop().animate({"width": 0},200);
-	}
-});
-$(".prd_nav > li").eq(0).trigger("click");
-
-$(".prd").hover(function(){
-	$(this).children(".prd_hover").stop().fadeIn(300);
-	$(this).find(".prd_compare").find("div").stop().animate({"top":"-43px"}, 300);	
-	if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
-		console.log("overflow");
-		$(this).find(".prd_cont").children("div").stop().animate({"bottom":0}, 200);
-		$(this).find(".prd_cont").children("div").click(function(){
-			$(this).parent().css({"height":"auto"});
-			$(this).hide(0);
-		});
-	}
-	$(this).find(".prd_detail").children("ul").hover(function(){
-		$(this).children(":first-child").stop().animate({"margin-top":"-38px"},200);
-	}, function(){
-		$(this).children(":first-child").stop().animate({"margin-top":0},200);
-	});
-}, function(){
-	$(this).children(".prd_hover").stop().fadeOut(300);
-	$(this).find(".prd_compare").find("div").stop().animate({"top":0}, 300);
-	if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
-		$(this).find(".prd_cont").children("div").stop().animate({"bottom":"-20px"}, 200);
-	}
-});
-$(".prd_hover_img").hover(function(){
-	$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
-}, function(){
-	$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
-});
-
-$('[data-toggle="tooltip"]').tooltip(); 
-
 /*
- $(".prd_nav > li").eq(0).css({"width":"100%"}).trigger("click");
-
- $(".prd_nav > li").click();
-
-$(".prd_nav > li").hover(function(){
-	$(this).css({"color":"#999"});
-	$(this).children("div").stop().animate({"width":"100%"},200);
-}, function(){
-	$(this).css({"color":"#666"});
-	$(this).children("div").stop().animate({"width":0},200);
-});
- */
-
- var prds =new Ajax("../json/prds.json");
- prds.send(resultFn);
- function resultFn(data){
-	 console.log(data);
- };
-
- /* 
 $.ajax({
-	 url:"../json/prds.json",
-	 type:"post",
-	 dataType:"json",
-	 success: function(data){
+	url: "../json/prds.json",
+	type: "post",
+	dataType: "json",
+	success: function(data) {
+		//여기가 실행 구문
 		console.log(data);
-	 },
-	 error: function (xhr, status, error){
-		 console.log(xhr, status, error);
-	 }
- });
+	},
+	error: function(xhr, status, error) {
+		console.log(xhr, status, error);
+	}
+});
 */
+
+// {"result":[{"title":"best", "data":[{},{}]},{...},{...}]} --> data 구조입니다.
+var prds = new Ajax("../json/prds.json");
+prds.send(resultFn);
+function resultFn(data) {
+	var html = '';
+	var li;
+	for(var i=0; i<data.result.length; i++){
+		html = '<ul class="prd_wrap clear">';
+		for(var j=0; j<data.result[i].data.length; j++) {
+			li = data.result[i].data[j];
+			html+= '<li class="prd">';
+			html+= '<div class="prd_img">';
+			html+= '<img src="'+li.img[0]+'" class="img">';
+			html+= '</div>';
+			html+= '<div class="prd_tit">'+li.title+'</div>';
+			html+= '<div class="prd_cate">'+li.cate+'</div>';
+			html+= '<div class="prd_price">';
+			html+= '<span>'+li.price[0]+'</span>';
+			html+= '<span>'+li.price[1]+'</span>';
+			html+= '</div>';
+			html+= '<div class="prd_hover">';
+			html+= '<div class="prd_img">';
+			html+= '<img src="'+li.img[1]+'" class="img prd_hover_img">';
+			html+= '</div>';
+			html+= '<ul>';
+			html+= '<li class="prd_compare">';
+			html+= '<div>';
+			html+= '<img src="../img/main/baseline-compare_arrows-24px.svg">';
+			html+= '</div>';
+			html+= '</li>';
+			html+= '<li class="prd_tit">'+li.title+'</li>';
+			html+= '<li class="prd_cate">'+li.cate+'</li>';
+			html+= '<li class="prd_price">';
+			html+= '<span>'+li.price[0]+'</span>';
+			html+= '<span>'+li.price[1]+'</span>';
+			html+= '</li>';
+			html+= '<li class="prd_cont">';
+			html+= li.cont;
+			html+= '<div><i class="fa fa-ellipsis-h"></i></div>';
+			html+= '</li>';
+			html+= '<li class="prd_detail clear">';
+			html+= '<div>';
+			html+= '<a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">';
+			html+= '<img src="../img/main/baseline-favorite_border-24px.svg">';
+			html+= '</a>';
+			html+= '</div>';
+			html+= '<ul>';
+			html+= '<li>VIEW PRODUCTS</li>';
+			html+= '<li><i class="fa fa-shopping-cart"></i></li>';
+			html+= '</ul>';
+			html+= '<div>';
+			html+= '<a href="#" data-toggle="tooltip" data-placement="top" title="Search">';
+			html+= '<img src="../img/main/baseline-search-24px (2).svg">';
+			html+= '</a>';
+			html+= '</div>';
+			html+= '</li>';
+			html+= '</ul>';
+			html+= '</div>';
+			if(li.pct > 0) html+= '<div class="prd_pop">-'+li.pct+'%</div>';
+			html+= '</li>';
+		}
+		html+= '</ul>';
+		$(".prd_out_wrap").append(html);
+	}
+	//생성완료된 후 이벤트 처리
+	$(".prd_nav > li").click(function(){
+		$(".prd_wrap").eq(prdNum).stop().animate({"top":"5rem", "opacity":0}, 500, function(){
+			$(this).css({"display":"none"});
+		});
+		prdNum = $(this).index();
+		$(".prd_wrap").eq(prdNum).css({"display":"block"}).stop().animate({"top":0, "opacity":1}, 500);
+		$(".prd_nav > li").css({"color":"#666"});
+		$(".prd_nav div").css({"width":0});
+		$(this).css({"color":"#222"});
+		$(this).children("div").css({"width":"100%"});
+	});
+	$(".prd_nav > li").hover(function(){
+		if($(this).index() != prdNum) {
+			$(this).css({"color":"#222"});
+			$(this).children("div").stop().animate({"width":"100%"}, 100);
+		}
+	},function(){
+		if($(this).index() != prdNum) {
+			$(this).css({"color":"#666"});
+			$(this).children("div").stop().animate({"width":0}, 100);
+		}
+	});
+	$(".prd_nav > li").eq(0).trigger("click");
+	
+	$(".prd").hover(function(){
+		$(this).children(".prd_hover").stop().fadeIn(300);
+		$(this).find(".prd_compare").find("div").stop().animate({"top":"-43px"}, 300);	
+		if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
+			console.log("overflow");
+			$(this).find(".prd_cont").children("div").stop().animate({"bottom":0}, 200);
+			$(this).find(".prd_cont").children("div").click(function(){
+				$(this).parent().css({"height":"auto"});
+				$(this).hide(0);
+			});
+		}
+		$(this).find(".prd_detail").children("ul").hover(function(){
+			$(this).children(":first-child").stop().animate({"margin-top":"-38px"}, 200);
+		}, function(){
+			$(this).children(":first-child").stop().animate({"margin-top":0}, 200);
+		});
+	}, function(){
+		$(this).children(".prd_hover").stop().fadeOut(300);
+		$(this).find(".prd_compare").find("div").stop().animate({"top":0}, 300);
+		if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
+			$(this).find(".prd_cont").children("div").stop().animate({"bottom":"-20px"}, 200);
+		}
+	});
+	$(".prd_hover_img").hover(function(){
+		$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
+	}, function(){
+		$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
+	});
+	$('[data-toggle="tooltip"]').tooltip(); 
+}
