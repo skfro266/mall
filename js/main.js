@@ -1,12 +1,25 @@
+/***** 자동높이 계산 *****/
+function autoHeight() {
+    $(".hei-wrap").imagesLoaded().done(heiCalc);
+    $(window).resize(heiCalc);
+    function heiCalc() {
+        $(".hei-wrap").each(function(){
+            $(this).height($(this).find(".hei-elem").height());
+        });
+    }
+}
+autoHeight();
+
 /***** 이미지 로더 *****/
 $('body').imagesLoaded()
-	.done(function (instance) {
+  .done( function( instance ) {
 		$(".loader").hide(0);
 		console.log('all images successfully loaded');
-	})
-	.progress(function (instance, image) {
-		var result = image.isLoaded ? 'loaded' : 'broken';
-	});
+  })
+  .progress( function( instance, image ) {
+    var result = image.isLoaded ? 'loaded' : 'broken';
+    console.log( 'image is ' + result + ' for ' + image.img.src );
+  });
 
 /***** firebse 초기변수 *****/
 var config = {
@@ -430,15 +443,6 @@ $(".featured_item").hover(function () {
 	});
 });
 
-/***** Featured Categories *****/
-$(".featured_item").hover(function(){
-	$(this).find("div").stop().animate({"bottom":0}, 200);
-	$(this).find("img").css({"animation-name":"featuredAni"});
-}, function(){
-	$(this).find("div").stop().animate({"bottom":"-3rem"}, 200);
-	$(this).find("img").css({"animation-name":"featuredAniBack"});
-});
-
 /***** Featured Products *****/
 var prdNum = 0;
 /*
@@ -463,7 +467,7 @@ function resultFn(data) {
 	var html = '';
 	var li;
 	for(var i=0; i<data.result.length; i++){
-		html = '<ul class="prd_wrap clear">';
+		html = '<ul class="prd_wrap clear hei-elem">';
 		for(var j=0; j<data.result[i].data.length; j++) {
 			li = data.result[i].data[j];
 			html+= '<li class="prd">';
@@ -519,11 +523,12 @@ function resultFn(data) {
 		}
 		html+= '</ul>';
 		$(".prd_out_wrap").append(html);
+		autoHeight();
 	}
 	//생성완료된 후 이벤트 처리
 	$(".prd_nav > li").click(function(){
 		$(".prd_wrap").eq(prdNum).stop().animate({"top":"5rem", "opacity":0}, 500, function(){
-			$(this).css({"display":"none"});
+			$(this).css({"display":"none"});	
 		});
 		prdNum = $(this).index();
 		$(".prd_wrap").eq(prdNum).css({"display":"block"}).stop().animate({"top":0, "opacity":1}, 500);
@@ -575,3 +580,8 @@ function resultFn(data) {
 	});
 	$('[data-toggle="tooltip"]').tooltip(); 
 }
+
+/***** 하단 배너 *****/
+$(window).resize(function(){
+	//본 작업을 진행하는 이유는 absolute되어 있는 객체의 높이
+}).trigger("resize");

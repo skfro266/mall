@@ -181,7 +181,7 @@ position: absolute; top:0; right:-0.5em;}
 
 .prd_hover {position:absolute; width:110%; padding:5% 5% 0 5%; left:-5%; top:-5%; border:1px solid #f1f1f1; 
 	box-shadow:0 0 5px rgba(0,0,0,0.2); display:none; z-index:3;}
-.prd_hover > ul {background-color:#fff; padding-bottom:5%;}
+.prd_hover > ul {background-color:#fff; width: 110%; margin-left: -5%; padding:0 5% 5% 5%;}
 .prd_hover > .prd_img {overflow: hidden;}
 .prd_hover > .prd_img > img {animation-duration:3s; animation-fill-mode: forwards; animation-timing-function: ease-in; opacity:0;}
 @keyframes prdImg {
@@ -207,3 +207,28 @@ position: absolute; top:0; right:-0.5em;}
 .prd_hover .prd_detail > :nth-child(3) {float:left; width:25%; padding:8px 0;} 
 
 .prd_pop {width:60px; height:60px; line-height:60px; color:#fff; font-weight:bold; font-size:1.125em; background-color: #84b736; border-radius:30px; position: absolute; top:10px; left:10px;}
+
+/***** 하단 배너 *****/
+.fbans {width:100%; min-height:490px; margin-top:3rem; background-color:#84b736;}
+.fban {width:100%; position:relative;}
+.fban > li {width:100%; position:absolute;}
+.fban .wrap {overflow:hidden; background:url(../img/main/wood-green-slider-bestsellers.svg) no-repeat center; background-size:100% auto; padding:2rem 0; color:#fff; font-size:1rem;}
+.fban .wrap > :first-child {float:left; max-width:545px; width:45%;}
+.fban .wrap > :last-child {float:left; width:55%;}
+.fban .wrap h1 {font-size:5em; letter-spacing:-2.5px;}
+.fban .wrap h5 {margin-top:3rem;}
+.fban .wrap > div > :nth-child(3) {margin-top:2rem;}
+.fban .wrap > div > :nth-child(3) > li {width:30%; float:left;}
+.fban .wrap > div > :nth-child(3) > li > div {padding:1rem 0; font-size:1.25em;}
+.fban .wrap > div > :nth-child(3) > :nth-child(2) {margin:0 5%;}
+.fban .wrap > div > :nth-child(3) > li > :first-child {border-bottom: 1px solid rgba(255,255,255, 0.2);}
+.fban .wrap > div > :nth-child(3) > li > :last-child {font-style:italic;}
+.fban .wrap > div > :nth-child(4) {margin-top:2rem;}
+.fban .wrap > div > :nth-child(4) > :first-child {font-size:3em; line-height: 1.125em;}
+.fban .wrap > div > :nth-child(4) .bt_addcart{padding: 1rem 2rem; border: 1px solid #fff; background-color: transparent; font-size: 1.125em; margin-left: 3rem;}
+.fban .wrap > div > :nth-child(4) .bt_addcart:hover{border-width: 2px; transform: translate(-1px, -1px);}
+
+@media screen and (max-width:768px){
+	.fban .wrap > :first-child {width:100%;}
+	.fban .wrap > :last-child {width:100%;}
+}
